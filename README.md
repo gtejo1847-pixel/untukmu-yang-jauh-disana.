@@ -18,18 +18,18 @@ body{
   overflow:hidden;
 }
 
-.card{
+.container{
   background:white;
-  padding:32px;
+  padding:30px;
   max-width:520px;
   border-radius:20px;
-  box-shadow:0 8px 30px rgba(0,0,0,.15);
+  box-shadow:0 10px 30px rgba(0,0,0,.15);
+  text-align:center;
   position:relative;
   z-index:2;
 }
 
 h1{
-  text-align:center;
   color:#c94f7c;
   margin-bottom:20px;
 }
@@ -42,23 +42,24 @@ h1{
   color:#333;
 }
 
-button{
+.tap{
   margin-top:20px;
-  width:100%;
-  padding:12px;
-  font-size:16px;
-  border:none;
-  border-radius:12px;
-  background:#c94f7c;
-  color:white;
+  font-size:14px;
+  color:#888;
   cursor:pointer;
+  animation:pulse 1.5s infinite;
 }
 
 .signature{
-  margin-top:16px;
-  text-align:center;
+  margin-top:18px;
   font-style:italic;
   color:#666;
+}
+
+@keyframes pulse{
+  0%{opacity:.4}
+  50%{opacity:1}
+  100%{opacity:.4}
 }
 
 /* HATI */
@@ -67,13 +68,13 @@ button{
   top:-10px;
   font-size:20px;
   color:#e63963;
-  animation: fall linear infinite;
+  animation:fall linear infinite;
   z-index:1;
 }
 
 @keyframes fall{
   to{
-    transform: translateY(110vh) rotate(360deg);
+    transform:translateY(110vh) rotate(360deg);
     opacity:0;
   }
 }
@@ -82,10 +83,10 @@ button{
 
 <body>
 
-<div class="card">
-<h1>Untukmu</h1>
+<div class="container" onclick="start()">
+  <h1>Untukmu</h1>
 
-<div class="poem">
+  <div class="poem">
 Aku sudah sampai di titik
 tidak berharap apa-apa dari siapa pun.
 Bukan karena kuat,
@@ -105,10 +106,10 @@ Kalau kamu mau tinggal sebentar,
 ajari aku pelan-pelan
 bahwa percaya tidak selalu berakhir
 dengan kehilangan.
-</div>
+  </div>
 
-<button onclick="start()">Putar Musik 🎵</button>
-<div class="signature">— Djati</div>
+  <div class="tap">Tap di sini</div>
+  <div class="signature">— Djati</div>
 </div>
 
 <audio id="music" loop>
@@ -116,6 +117,27 @@ dengan kehilangan.
 </audio>
 
 <script>
+let started=false;
+
 function start(){
-  const music = document.getElementById("music");
-  music.play().catch(()=>alert("Pa
+  if(started) return;
+  started=true;
+
+  const music=document.getElementById("music");
+  music.play().catch(()=>alert("Pastikan file musik.mpeg ada"));
+
+  setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(Math.random()*3+3)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },500);
+}
+</script>
+
+</body>
+</html>
+
