@@ -1,4 +1,3 @@
-# untukmu-yang-jauh-disana.
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -140,4 +139,3 @@ function start(){
 
 </body>
 </html>
-
